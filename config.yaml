@@ -1,0 +1,12 @@
+database:
+  prod:
+    host: shortlinks_db_server
+    user: shortlinks_user
+    password: shortlinks_pass
+    dbname: shortlinks_db
+    port: 5432
+    sslmode: disable
+    timezone: UTC
+  test:
+    driver: sqlite
+    dsn: ":memory:"
