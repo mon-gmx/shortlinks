@@ -8,6 +8,10 @@ import (
 )
 
 func GetAllURLs(w http.ResponseWriter, r *http.Request) {
+
+    if !IsValidMethod(w, r, http.MethodGet) {
+        return
+    }
     var urls []models.URL
 
     if result := database.DB.Find(&urls); result.Error != nil {

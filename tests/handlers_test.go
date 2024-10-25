@@ -1,7 +1,6 @@
 package handlers_test
 
 import (
-    "fmt"
     "net/http"
     "net/http/httptest"
     "strings"
@@ -13,6 +12,32 @@ import (
     "go-shortlinks/database"
     "go-shortlinks/config"
 )
+
+func TestIsValidMethodInvalid(t *testing.T) {
+    req, err := http.NewRequest("GET", "/dummy", nil)
+    if err != nil {
+        t.Fatal(err)
+    }
+
+    rr := httptest.NewRecorder()
+    handlers.IsValidMethod(rr, req, http.MethodPost)
+    if status := rr.Code; status != http.StatusMethodNotAllowed {
+        t.Errorf("Invalid method was allowed: got %v want %v", status, http.StatusMethodNotAllowed)
+    }
+}
+
+func TestIsValidMethodValid(t *testing.T) {
+    req, err := http.NewRequest("GET", "/dummy", nil)
+    if err != nil {
+        t.Fatal(err)
+    }
+
+    rr := httptest.NewRecorder()
+    handlers.IsValidMethod(rr, req, http.MethodGet)
+    if status := rr.Code; status != http.StatusOK {
+        t.Errorf("Valid method was not allowed: got %v want %v", status, http.StatusOK)
+    }
+}
 
 func setupTestDB() (*gorm.DB, error) {
     cfg, err := config.LoadConfig()
@@ -87,7 +112,6 @@ func TestGetAllURLs(t *testing.T) {
     }
 
     rr := httptest.NewRecorder()
-    //fmt.Println(rr)
     handlers.GetAllURLs(rr, req)
 
     if status := rr.Code; status != http.StatusOK {

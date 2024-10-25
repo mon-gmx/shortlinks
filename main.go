@@ -41,7 +41,7 @@ func main() {
     http.HandleFunc("/", handlers.RedirectURL)
     http.HandleFunc("/urls", handlers.GetAllURLs)
 
-    log.Println("Server is running on :8000")
-    log.Fatal(http.ListenAndServe(":8000", nil))
+    log.Println("Server is running on :80")
+    log.Fatal(http.ListenAndServe(":80", nil))
 }
 

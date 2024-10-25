@@ -8,6 +8,9 @@ import (
 
 // RedirectURL handles URL redirection based on the handle
 func RedirectURL(w http.ResponseWriter, r *http.Request) {
+    if !IsValidMethod(w, r, http.MethodGet) {
+        return
+    }
     handle := r.URL.Path[1:] // Remove leading "/"
     
     var url models.URL
@@ -15,7 +18,6 @@ func RedirectURL(w http.ResponseWriter, r *http.Request) {
         http.NotFound(w, r)
         return
     }
-
     http.Redirect(w, r, url.URL, http.StatusFound)
 }
 
