@@ -11,5 +11,5 @@ database:
     sslmode: disable
     timezone: UTC
   test:
-    driver: sqlite
+    driver: sqlite # unused, just a pointer
     dsn: ":memory:"
