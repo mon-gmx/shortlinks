@@ -1,6 +1,7 @@
 package config
 
 import (
+    "log"
     "os"
     "io/ioutil"
     "gopkg.in/yaml.v3"
@@ -11,7 +12,7 @@ type Config struct {
     Server struct{
 	Host    string `yaml:"host"`
 	Port    int    `yaml:"port"`
-    }
+} `yaml:"server"`
     Database struct {
         Prod struct {
             Host     string `yaml:"host"`
@@ -32,6 +33,7 @@ type Config struct {
 func LoadConfig() (*Config, error) {
     config := &Config{}
     configFile := os.Getenv("CONFIG_FILE")
+    log.Printf("Using config file: %v", configFile)
     if configFile == "" {
         configFile = "config.yaml"
     }
