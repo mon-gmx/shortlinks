@@ -8,9 +8,13 @@ Make sure you have a **Postgres** database beforehand. You will need it for your
 
 To start the service, just run using `go mod run` or build a binary if you plan on hosting and automating.
 
+If you feel like turning it into a service or just have a binary, run: `go build`
+
 ## How to test?
 
 `CONFIG_FILE=$(pwd)/config.yaml go test ./tests/... -v`
+
+This would work as well for execution, the default behavior is searching for `config.yaml` where the service runs.
 
 
 ## Examples:
@@ -22,5 +26,6 @@ To start the service, just run using `go mod run` or build a binary if you plan 
 ### To be redirected:
   `curl -L http://localhost:8080/goog`
 
-
 To have the best experience for this redirection project, you would want to have this project serving in port 80 and a record in your DNS so you can just use this in your browser like: `shortlinks/googl` and be redirected to the site associated to the `googl` handler.
+
+If you want to expose this directly, you are advised to use a proxy from your HTTP server so you don't need to add `CAP_NET_BIND_SERVICE` permissions and add security concerns
