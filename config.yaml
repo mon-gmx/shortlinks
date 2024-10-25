@@ -1,9 +1,9 @@
 database:
   prod:
-    host: shortlinks_db_server
-    user: shortlinks_user
-    password: shortlinks_pass
-    dbname: shortlinks_db
+    host: shortlinks-db-server
+    user: shortlinks-user
+    password: shortlinks-password
+    dbname: shortlinks
     port: 5432
     sslmode: disable
     timezone: UTC

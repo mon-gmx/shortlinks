@@ -1,6 +1,7 @@
 package handlers_test
 
 import (
+    "fmt"
     "net/http"
     "net/http/httptest"
     "strings"
@@ -70,6 +71,27 @@ func TestRedirectURL(t *testing.T) {
 
     if status := rr.Code; status != http.StatusFound {
         t.Errorf("handler returned wrong status code: got %v want %v", status, http.StatusFound)
+    }
+}
+
+func TestGetAllURLs(t *testing.T) {
+    db, err := setupTestDB()
+    if err != nil {
+        t.Fatal(err)
+    }
+
+    db.Create(&models.URL{Handle: "testhandle", URL: "http://example.com"})
+    req, err := http.NewRequest("GET", "/urls", nil)
+    if err != nil {
+        t.Fatal(err)
+    }
+
+    rr := httptest.NewRecorder()
+    //fmt.Println(rr)
+    handlers.GetAllURLs(rr, req)
+
+    if status := rr.Code; status != http.StatusOK {
+        t.Errorf("handler returned no results: got %v want %v", status, http.StatusOK)
     }
 }
 
