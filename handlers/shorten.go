@@ -10,7 +10,7 @@ import (
 
 // ShortenURL handles the URL shortening
 func ShortenURL(w http.ResponseWriter, r *http.Request) {
-    if !IsValidMethod(w, r, http.MethodGet) {
+    if !IsValidMethod(w, r, http.MethodPost) {
         return
     }
 

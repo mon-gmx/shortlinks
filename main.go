@@ -41,7 +41,8 @@ func main() {
     http.HandleFunc("/", handlers.RedirectURL)
     http.HandleFunc("/urls", handlers.GetAllURLs)
 
-    log.Println("Server is running on :80")
-    log.Fatal(http.ListenAndServe(":80", nil))
+    address := fmt.Sprintf("%v:%v", cfg.Server.Host, cfg.Server.Port)
+    log.Printf("Server is running on: %v", address)
+    log.Fatal(http.ListenAndServe(address, nil))
 }
 

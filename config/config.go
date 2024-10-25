@@ -8,6 +8,10 @@ import (
 
 // Config represents the structure of the config.yaml file
 type Config struct {
+    Server struct{
+	Host    string `yaml:"host"`
+	Port    int    `yaml:"port"`
+    }
     Database struct {
         Prod struct {
             Host     string `yaml:"host"`

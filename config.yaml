@@ -1,9 +1,12 @@
 database:
+  server:
+    host: localhost
+    port: 8000
   prod:
-    host: shortlinks-db-server
-    user: shortlinks-user
-    password: shortlinks-password
-    dbname: shortlinks
+    host: shortlinks_db_host
+    user: shortlinks_user
+    password: shortlinks_password
+    dbname: shortlinks_db
     port: 5432
     sslmode: disable
     timezone: UTC
