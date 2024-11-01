@@ -37,9 +37,10 @@ func main() {
     database.DB.AutoMigrate(&models.URL{})
 
     // Set up routes
-    http.HandleFunc("/shorten", handlers.ShortenURL)
+    http.HandleFunc("/shorts", handlers.ShortenURL)
     http.HandleFunc("/", handlers.RedirectURL)
     http.HandleFunc("/urls", handlers.GetAllURLs)
+    http.HandleFunc("/updates", handlers.GetURLUpdates(cfg.Templates.Path))
 
     address := fmt.Sprintf("%v:%v", cfg.Server.Host, cfg.Server.Port)
     log.Printf("Server is running on: %v", address)

@@ -1,6 +1,8 @@
 server:
   host: shortlinks_host
   port: 8000
+templates:
+  path: ./templates
 database:
   prod:
     host: shortlinks_db_host

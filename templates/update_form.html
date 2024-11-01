@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update URL</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .form-container {
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
+            background-color: #f9f9f9;
+        }
+        .btn-custom {
+            background-color: #4CAF50; /* Green */
+            color: white;
+        }
+        .btn-custom:hover {
+            background-color: #45a049;
+        }
+        .alert-response {
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <h3 class="text-center">Update URL</h3>
+            <form id="urlForm" class="mt-4">
+                <div class="form-group">
+                    <label for="url">Enter URL:</label>
+                    <input type="text" id="url" name="url" class="form-control" placeholder="Enter a URL" required>
+                </div>
+                <div class="form-group">
+                    <label for="handle">Enter Handle:</label>
+                    <input type="text" id="handle" name="handle" class="form-control" placeholder="Enter a handle" required>
+                </div>
+                <button type="button" onclick="submitForm()" class="btn btn-custom btn-block">Submit</button>
+            </form>
+            <div id="responseAlert" class="alert alert-response d-none" role="alert"></div>
+        </div>
+    </div>
+<script>
+    function submitForm() {
+        const url = document.getElementById('url').value;
+        const handle = document.getElementById('handle').value;
+        const alertBox = document.getElementById('responseAlert');
+
+        // Reset the alert box classes
+        alertBox.classList.remove('alert-success', 'alert-danger', 'd-none');
+        
+        fetch('/shorts', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ url: url, handle: handle })
+        })
+        .then(response => response.text())
+        .then(data => {
+            // Check if the response indicates a duplicate or other error
+            if (data.includes("ERROR:")) {
+                alertBox.classList.add('alert-danger');
+                alertBox.innerText = 'Error: Duplicate entry for handle. Please use a unique handle.';
+            } else if (data.toLowerCase().includes("error")) {
+                alertBox.classList.add('alert-danger');
+                alertBox.innerText = 'Error: ' + data;
+            } else {
+                alertBox.classList.add('alert-success');
+                alertBox.innerText = 'Success: ' + data;
+            }
+        })
+        .catch(error => {
+            alertBox.classList.add('alert-danger');
+            alertBox.innerText = 'Error: ' + error.message;
+        });
+    }
+</script>
+</body>
+</html>

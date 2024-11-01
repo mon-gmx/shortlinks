@@ -21,7 +21,8 @@ This would work as well for execution, the default behavior is searching for `co
 
 ### To create a new shortlink:
   You can have as many short links to the same URL as you want, there's no validation right now
-  `curl -X POST http://localhost:8080/shorten -H "Content-Type: application/json" -d '{"handle": "goog", "url": "http://www.google.com"}'`
+  `curl -X POST http://localhost:8080/shorts -H "Content-Type: application/json" -d '{"handle": "goog", "url": "http://www.google.com"}'`
+  You can use the `/updates` endpoints to load a form so this can be a simpler thing to do
   
 ### To be redirected:
   `curl -L http://localhost:8080/goog`

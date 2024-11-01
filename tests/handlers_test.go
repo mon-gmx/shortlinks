@@ -119,3 +119,23 @@ func TestGetAllURLs(t *testing.T) {
     }
 }
 
+func TestGetURLUpdates(t *testing.T) {
+    cfg, err := config.LoadConfig()
+    if err != nil {
+	    t.Fatalf("Could not load configuration, templates path needs this value: %v", err)
+    }
+
+    req, err := http.NewRequest("GET", "/updates", nil)
+    if err != nil {
+        t.Fatalf("Could not create request: %v", err)
+    }
+
+    rr := httptest.NewRecorder()
+
+    handler := handlers.GetURLUpdates(cfg.Templates.Path)
+    handler.ServeHTTP(rr, req)
+
+    if status := rr.Code; status != http.StatusOK {
+        t.Errorf("handler returned wrong status code: got %v want %v", status, http.StatusOK)
+    }
+}

@@ -12,7 +12,10 @@ type Config struct {
     Server struct{
 	Host    string `yaml:"host"`
 	Port    int    `yaml:"port"`
-} `yaml:"server"`
+    } `yaml:"server"`
+    Templates struct {
+	Path    string `yaml:"path"`
+    } `yaml:"templates"`
     Database struct {
         Prod struct {
             Host     string `yaml:"host"`
