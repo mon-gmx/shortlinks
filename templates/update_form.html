@@ -6,6 +6,10 @@
     <title>Update URL</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- jQuery and Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -44,13 +48,22 @@
                     <label for="handle">Enter Handle:</label>
                     <input type="text" id="handle" name="handle" class="form-control" placeholder="Enter a handle" required>
                 </div>
-                <button type="button" onclick="submitForm()" class="btn btn-custom btn-block">Submit</button>
+                <div class="dropdown show">
+                  <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="actionDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Choose Action
+                  </a>
+                
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <a class="dropdown-item" href="#" onclick="submitForm('POST')">Submit</a>
+                    <a class="dropdown-item" href="#" onclick="submitForm('PUT')">Update</a>
+                  </div>
+                </div>
             </form>
             <div id="responseAlert" class="alert alert-response d-none" role="alert"></div>
         </div>
     </div>
 <script>
-    function submitForm() {
+    function submitForm(action) {
         const url = document.getElementById('url').value;
         const handle = document.getElementById('handle').value;
         const alertBox = document.getElementById('responseAlert');
@@ -59,7 +72,7 @@
         alertBox.classList.remove('alert-success', 'alert-danger', 'd-none');
         
         fetch('/shorts', {
-            method: 'POST',
+            method: action,
             headers: {
                 'Content-Type': 'application/json'
             },
