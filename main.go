@@ -4,6 +4,7 @@ import (
     "log"
     "fmt"
     "net/http"
+    "net/url"
     "go-shortlinks/config"
     "go-shortlinks/database"
     "go-shortlinks/models"
@@ -18,17 +19,20 @@ func main() {
     }
 
     // Build DSN for PostgreSQL (prod)
-    dsn := fmt.Sprintf(
-        "host=%s user=%s password=%s dbname=%s port=%d sslmode=%s TimeZone=%s",
-        cfg.Database.Prod.Host,
-        cfg.Database.Prod.User,
-        cfg.Database.Prod.Password,
-        cfg.Database.Prod.DBName,
+    host := url.QueryEscape(cfg.Database.Prod.Host)
+    user := url.QueryEscape(cfg.Database.Prod.User)
+    password := url.QueryEscape(cfg.Database.Prod.Password)
+    dbName := url.QueryEscape(cfg.Database.Prod.DBName)
+
+    dsn := fmt.Sprintf("postgres://%s:%s@%s:%d/%s?sslmode=%s&timezone=%s",
+        user,
+        password,
+        host,
         cfg.Database.Prod.Port,
+        dbName,
         cfg.Database.Prod.SSLMode,
-        cfg.Database.Prod.TimeZone,
-    )
-    
+        cfg.Database.Prod.TimeZone)
+
     if err := database.InitDB(dsn); err != nil {
         log.Fatalf("failed to connect to PostgreSQL: %v", err)
     }
