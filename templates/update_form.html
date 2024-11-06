@@ -38,7 +38,7 @@
 <body>
     <div class="container">
         <div class="form-container">
-            <h3 class="text-center">Update URL</h3>
+            <h3 class="text-center">Shortlinks! go/short</h3>
             <form id="urlForm" class="mt-4">
                 <div class="form-group">
                     <label for="url">Enter URL:</label>
@@ -48,11 +48,11 @@
                     <label for="handle">Enter Handle:</label>
                     <input type="text" id="handle" name="handle" class="form-control" placeholder="Enter a handle" required>
                 </div>
-                <div class="dropdown show">
+                <div class="dropdown show" align="center">
                   <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="actionDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Choose Action
                   </a>
-                
+
                   <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                     <a class="dropdown-item" href="#" onclick="submitForm('POST')">Submit</a>
                     <a class="dropdown-item" href="#" onclick="submitForm('PUT')">Update</a>
@@ -70,7 +70,7 @@
 
         // Reset the alert box classes
         alertBox.classList.remove('alert-success', 'alert-danger', 'd-none');
-        
+
         fetch('/shorts', {
             method: action,
             headers: {
