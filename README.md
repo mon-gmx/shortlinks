@@ -23,7 +23,7 @@ This would work as well for execution, the default behavior is searching for `co
   You can have as many short links to the same URL as you want, there's no validation right now:
   `curl -X POST http://localhost:8080/shorts -H "Content-Type: application/json" -d '{"handle": "goog", "url": "http://www.google.com"}'`
   
-  As an alternative, you can use the `/updates` endpoints to load a form in your browser, so you have a simple UI to add new entries.
+  As an alternative, you can use the `/updates` endpoint to load a form in your browser, so you have a simple UI to add new entries.
 
   
 ### To be redirected:
