@@ -42,3 +42,16 @@ If you want to expose this directly, you are advised to use a proxy from your HT
             proxy_set_header X-Forwarded-Proto $scheme;
         }
 ```
+
+### How to add this to my DNS?
+
+Well, you can't in the strict sense, even if you add an SRV entry, the result would be messy. But you can add an entry to a small DHCP/DNS instance like dnsmasq! Or you can simply add the entry to your hosts file. These require minimum effort and are very easy to setup.
+
+```
+# dnsmasq.conf entry
+address=/go/<HOST RUNNING [PROXY FOR] SHORTLINKS>
+address=/.go/<HOST RUNNING [PROXY FOR] SHORTLINKS>
+
+# add your DNS downstream so recursive search happens
+server=<YOUR DNS IP>
+```
