@@ -18,6 +18,7 @@
 # vendor/
 
 # Go workspace file
+go.mod
 go.work
 go.work.sum
 
