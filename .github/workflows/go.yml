@@ -25,7 +25,7 @@ jobs:
       run: export GOROOT=$(pwd)
 
     - name: Build
-      run: go build -v go-shortlinks
+      run: go build -v ./... go-shortlinks
 
     - name: Test
       run: export CONFIG_FILE=$(pwd)/config.yaml; go test -v ./tests/...
