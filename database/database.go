@@ -7,9 +7,8 @@ import (
 	"gorm.io/gorm"
 )
 
-var DB *gorm.DB // Global DB variable
+var DB *gorm.DB
 
-// InitDB initializes the database connection
 func InitDB(dsn string) error {
 	var err error
 	DB, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})

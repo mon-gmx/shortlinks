@@ -1,6 +1,8 @@
 module go-shortlinks
 
-go 1.20
+go 1.22
+
+toolchain go1.23.2
 
 require (
 	gopkg.in/yaml.v3 v3.0.1
