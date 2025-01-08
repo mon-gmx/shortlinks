@@ -37,15 +37,14 @@ func main() {
         log.Fatalf("failed to connect to PostgreSQL: %v", err)
     }
 
-    // Migrate the schema
     database.DB.AutoMigrate(&models.URL{})
 
-    // Set up routes
-    http.HandleFunc("/shorts", handlers.ShortenURL)
     http.HandleFunc("/", handlers.RedirectURL)
-    http.HandleFunc("/urls", handlers.GetAllURLs)
+    http.HandleFunc("/healthcheck", handlers.Healthcheck)
+    http.HandleFunc("/shorts", handlers.ShortenURL)
     http.HandleFunc("/updates", handlers.GetURLUpdates(cfg.Templates.Path))
-
+    http.HandleFunc("/urls", handlers.GetAllURLs)
+    
     address := fmt.Sprintf("%v:%v", cfg.Server.Host, cfg.Server.Port)
     log.Printf("Server is running on: %v", address)
     log.Fatal(http.ListenAndServe(address, nil))
