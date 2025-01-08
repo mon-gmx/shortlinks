@@ -58,7 +58,7 @@ server=<YOUR DNS IP>
 
 ### Special endpoints
 
-There are a few endpoints in the project intended to serve some functionality other than redirection:
+There are a few endpoints in the project intended to serve some functionality other than redirection, these should not be added as handlers:
 * `/shorts` this is the endpoint used to add new entries into the database
 * `/urls` this endpoint will return all entries from the database in plain text
 * `/updates` this endpoint returns a form to add or update entries into the database
