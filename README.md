@@ -12,7 +12,7 @@ If you feel like turning it into a service or just have a binary, run: `go build
 
 ## How to test?
 
-`CONFIG_FILE=$(pwd)/config.yaml go test ./tests/... -v`
+`CONFIG_FILE=$(pwd)/config.yaml; go test ./tests/... -v`
 
 This would work as well for execution, the default behavior is searching for `config.yaml` where the service runs.
 

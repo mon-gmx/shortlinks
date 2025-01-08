@@ -100,6 +100,20 @@ func TestShortenURLPut(t *testing.T) {
 	}
 }
 
+func TestHealthcheck(t *testing.T) {
+	req, err := http.NewRequest("GET", "/healthcheck", nil)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	rr := httptest.NewRecorder()
+	handlers.Healthcheck(rr, req)
+
+	if status := rr.Code; status != http.StatusOK {
+		t.Errorf("healthcheck returned the wrong code: got %v want %v", status, http.StatusOK)
+	}
+}
+
 func TestRedirectURL(t *testing.T) {
 	db, err := setupTestDB()
 	if err != nil {
