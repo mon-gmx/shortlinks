@@ -1,6 +1,6 @@
 # shortlinks
 
-This is a backend service that intends to give you a URL shortener-like functionality where you create (easy to remember) handles and you use them with a prefix like you would do using go/links.
+This is a backend service that intends to give you a URL alias functionality where you create (easy to remember) handles and you use them with a prefix.
 
 ## How to run?
 
